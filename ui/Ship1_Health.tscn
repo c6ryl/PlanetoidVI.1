@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/Ship1_Health.gd" type="Script" id=1]
+[ext_resource path="res://ui/ship1_Health_over.png" type="Texture" id=2]
+[ext_resource path="res://ui/ship1_Health_progress.png" type="Texture" id=3]
+[ext_resource path="res://ui/ship1_Health_under.png" type="Texture" id=4]
+
+[node name="Ship1_Health" type="Control"]
+margin_left = -443.707
+margin_top = 181.442
+margin_right = -403.707
+margin_bottom = 221.442
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ship1_Health" type="TextureProgress" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+value = 50.0
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+fill_mode = 3

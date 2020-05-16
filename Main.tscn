@@ -1,0 +1,124 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://ships/Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://planets/Planet2.tscn" type="PackedScene" id=2]
+[ext_resource path="res://planets/Planet1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://backdrops/Sky.png" type="Texture" id=4]
+[ext_resource path="res://Fishtoad.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World.gd" type="Script" id=6]
+[ext_resource path="res://escape.png" type="Texture" id=7]
+[ext_resource path="res://TITLE.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Ship2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/Ship2_Health.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/player2_interface.gd" type="Script" id=11]
+[ext_resource path="res://player1_interface.gd" type="Script" id=12]
+[ext_resource path="res://ui/Ship1_Health.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/UserInterface.tscn" type="PackedScene" id=14]
+
+[node name="World" type="Node2D"]
+position = Vector2( 523.83, 275.293 )
+script = ExtResource( 6 )
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="UserInterface" parent="CanvasLayer2" instance=ExtResource( 14 )]
+margin_left = 0.0
+margin_top = 3.4119
+margin_right = 0.0
+margin_bottom = 3.41187
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+follow_viewport_enable = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+margin_left = -280.0
+margin_top = -264.0
+margin_right = 1328.0
+margin_bottom = 959.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Planet2" parent="." instance=ExtResource( 2 )]
+collision_layer = 12
+collision_mask = 15
+
+[node name="Planet1" parent="." instance=ExtResource( 3 )]
+collision_layer = 12
+collision_mask = 15
+
+[node name="Ship" parent="." instance=ExtResource( 1 )]
+position = Vector2( 196.2, 262.792 )
+collision_mask = 15
+
+[node name="Fishtoad" parent="." instance=ExtResource( 5 )]
+
+[node name="TITLE" parent="." instance=ExtResource( 8 )]
+
+[node name="escape" type="Sprite" parent="."]
+position = Vector2( -455.452, -251.786 )
+texture = ExtResource( 7 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.6, 0.6 )
+
+[node name="Ship2" parent="." instance=ExtResource( 9 )]
+position = Vector2( -167.44, -261.177 )
+
+[node name="player2_interface" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ship2_Health" parent="player2_interface" instance=ExtResource( 10 )]
+margin_left = 415.761
+margin_top = 203.241
+margin_right = 415.761
+margin_bottom = 203.241
+
+[node name="player1_interface" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player1_fuel" type="TextureProgress" parent="player1_interface"]
+margin_left = -490.832
+margin_top = 182.658
+margin_right = -445.832
+margin_bottom = 283.658
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ship1_Health" parent="player1_interface" instance=ExtResource( 13 )]
+[connection signal="death_signal" from="Ship" to="CanvasLayer2/UserInterface" method="_on_Ship_death_signal"]
+[connection signal="hurt_signal" from="Ship" to="player1_interface" method="_on_Ship_hurt_signal"]
+[connection signal="body_entered" from="TITLE" to="Fishtoad" method="_on_TITLE_body_entered"]
+[connection signal="death_signal" from="Ship2" to="CanvasLayer2/UserInterface" method="_on_Ship2_death_signal"]
+[connection signal="hurt_signal" from="Ship2" to="player2_interface" method="_on_Ship2_hurt_signal"]
+[connection signal="health_changed" from="player2_interface" to="player2_interface/Ship2_Health" method="_on_player2_interface_health_changed"]
+[connection signal="health_changed" from="player1_interface" to="player1_interface/Ship1_Health" method="_on_player1_interface_health_changed"]
+
+[editable path="Ship"]
+
+[editable path="Ship2"]
+
+[editable path="player2_interface/Ship2_Health"]
+
+[editable path="player1_interface/Ship1_Health"]

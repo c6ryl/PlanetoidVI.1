@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ships/Projectile.gd" type="Script" id=1]
+[ext_resource path="res://ships/projectile.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 1.50757
+height = 1.76145
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 1.73741
+height = 1.66282
+
+[node name="Projectile" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -0.657881 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( -0.0248938, -0.622357 )
+shape = SubResource( 2 )

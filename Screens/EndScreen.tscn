@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Fonts/RobotoTheme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/RestartButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/Title.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/QuitButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://backdrops/Sky.png" type="Texture" id=8]
+
+[node name="EndScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sky" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_bottom = 5.0
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TittleEND" parent="." instance=ExtResource( 3 )]
+margin_left = -72.0
+margin_top = -304.0
+margin_right = 136.0
+margin_bottom = -192.0
+text = "END....."
+
+[node name="LabelData" type="Label" parent="."]
+margin_left = 528.0
+margin_top = 168.0
+margin_right = 799.0
+margin_bottom = 237.0
+text = "Your final score is %s 
+You Died %s times "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 537.719
+margin_top = 280.0
+margin_right = 777.719
+margin_bottom = 454.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartButton" parent="VBoxContainer" instance=ExtResource( 2 )]
+margin_bottom = 85.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "RESTART"
+
+[node name="QuitButton" parent="VBoxContainer" instance=ExtResource( 4 )]
+[connection signal="button_up" from="VBoxContainer/RestartButton" to="VBoxContainer" method="_on_RestartButton_button_up"]
